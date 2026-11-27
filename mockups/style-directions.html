@@ -1,0 +1,280 @@
+<title>Portfolio Style Directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a page shell with tabs. Each tab shows one mock homepage inside a browser frame, and clicking a card opens that style's popup. */
+:root {
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --fg: #16181d;
+  --muted: #5b6270;
+  --line: #d9dce3;
+  --accent: #2f4bd8;
+  --font-ui: "Inter Tight", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111318; --surface: #1a1d24; --fg: #eceef3; --muted: #9aa1b0; --line: #2c313b; --accent: #8fa2ff; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #111318; --surface: #1a1d24; --fg: #eceef3; --muted: #9aa1b0; --line: #2c313b; --accent: #8fa2ff; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+.shell { max-width: 1080px; margin: 0 auto; display: grid; gap: 24px; }
+header.intro h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 6px; text-wrap: balance; letter-spacing: -0.01em; }
+header.intro p { margin: 0; color: var(--muted); max-width: 64ch; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.tab {
+  font: 500 14px var(--font-ui); color: var(--fg); background: var(--surface); border: 1px solid var(--line);
+  padding: 10px 16px; border-radius: 999px; cursor: pointer; display: flex; gap: 8px; align-items: center;
+}
+.tab small { font-family: var(--font-mono); color: var(--muted); font-size: 11px; letter-spacing: 0.04em; }
+.tab[aria-selected="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.tab[aria-selected="true"] small { color: inherit; opacity: 0.7; }
+.tab:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; min-width: 0; }
+.note b { display: block; font-size: 11px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+.frame { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
+.frame-bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--line); font: 12px var(--font-mono); color: var(--muted); }
+.frame-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: inline-block; }
+.frame-bar span { margin-left: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.example-tag { font: 12px var(--font-mono); color: var(--muted); }
+
+/* ---------- Shared mock structure ---------- */
+.mock { padding: clamp(20px, 4vw, 48px); min-height: 520px; position: relative; }
+.mock nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(28px, 5vw, 56px); }
+.mock nav ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; }
+.mock .hero h2 { margin: 0; text-wrap: balance; }
+.mock .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; margin-top: clamp(28px, 5vw, 48px); }
+.mock .card { text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 10px; font: inherit; color: inherit; min-width: 0; }
+.mock .thumb { aspect-ratio: 16/10; max-width: 100%; width: 100%; display: grid; place-items: center; }
+
+/* ---------- A: Minimal (Swiss / studio) ---------- */
+.mock.a { background: #f7f7f5; color: #151515; font-family: "Inter Tight", system-ui, sans-serif; }
+.mock.a nav { font-size: 14px; }
+.mock.a nav strong { font-weight: 600; letter-spacing: -0.01em; }
+.mock.a nav li { color: #6b6b6b; }
+.mock.a .hero h2 { font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1.02; max-width: 16ch; }
+.mock.a .hero p { color: #6b6b6b; max-width: 46ch; margin: 16px 0 0; }
+.mock.a .card { background: none; border: 0; padding: 0; border-top: 1px solid #151515; padding-top: 12px; }
+.mock.a .thumb { background: #e9e9e5; }
+.mock.a .card h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.mock.a .card p { margin: 0; color: #6b6b6b; font-size: 14px; }
+.mock.a .meta { font: 12px "IBM Plex Mono", monospace; color: #6b6b6b; display: flex; justify-content: space-between; }
+.mock.a .card:hover h3 { color: #1f3fd1; }
+
+/* ---------- B: Bold & colourful ---------- */
+.mock.b { background: #fff6e0; color: #1d1a16; font-family: "Space Grotesk", system-ui, sans-serif; }
+.mock.b nav strong { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 20px; }
+.mock.b nav li { font-weight: 500; }
+.mock.b .hero h2 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: clamp(2.2rem, 6vw, 4.4rem); line-height: 0.95; letter-spacing: -0.03em; max-width: 14ch; }
+.mock.b .hero h2 em { font-style: normal; background: #ff5ca8; padding: 0 0.15em; border-radius: 0.15em; }
+.mock.b .hero p { font-size: 17px; max-width: 44ch; margin: 18px 0 0; }
+.mock.b .card { border: 2.5px solid #1d1a16; border-radius: 18px; padding: 12px; background: #ffffff; box-shadow: 5px 5px 0 #1d1a16; transition: transform .15s, box-shadow .15s; }
+.mock.b .card:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 #1d1a16; }
+.mock.b .thumb { border-radius: 10px; border: 2px solid #1d1a16; }
+.mock.b .card h3 { margin: 0; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 20px; }
+.mock.b .card p { margin: 0; font-size: 14px; }
+.mock.b .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.mock.b .chip { font-size: 12px; font-weight: 500; border: 1.5px solid #1d1a16; border-radius: 99px; padding: 1px 9px; }
+
+/* ---------- C: Console (dark blueprint) ---------- */
+.mock.c {
+  background-color: #0e1a2b; color: #d7e1ee; font-family: "Space Grotesk", system-ui, sans-serif;
+  background-image: linear-gradient(#ffffff0a 1px, transparent 1px), linear-gradient(90deg, #ffffff0a 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.mock.c nav { font: 13px "JetBrains Mono", monospace; }
+.mock.c nav strong { color: #ffb547; font-weight: 600; }
+.mock.c nav li { color: #8ea3bd; }
+.mock.c .hero .prompt { font: 13px "JetBrains Mono", monospace; color: #ffb547; margin-bottom: 10px; }
+.mock.c .hero h2 { font-size: clamp(1.9rem, 4.6vw, 3.2rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.08; max-width: 20ch; }
+.mock.c .hero p { color: #8ea3bd; max-width: 50ch; margin: 14px 0 0; }
+.mock.c .card { background: #13233a; border: 1px solid #27405f; border-radius: 6px; padding: 12px; }
+.mock.c .card:hover { border-color: #ffb547; }
+.mock.c .thumb { background: #0b1524; border: 1px dashed #27405f; border-radius: 4px; }
+.mock.c .card h3 { margin: 0; font-size: 17px; font-weight: 500; }
+.mock.c .card p { margin: 0; color: #8ea3bd; font-size: 14px; }
+.mock.c .meta { font: 12px "JetBrains Mono", monospace; color: #6f86a3; }
+
+/* ---------- Popup (dialog), styled per direction ---------- */
+dialog.pop { border: 0; padding: 0; width: min(760px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto; }
+dialog.pop::backdrop { background: rgba(10, 12, 18, 0.55); }
+.pop-inner { padding: clamp(20px, 4vw, 36px); display: grid; gap: 18px; }
+.pop-head { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+.pop-head h3 { margin: 0; text-wrap: balance; }
+.close { background: none; border: 0; font-size: 22px; line-height: 1; cursor: pointer; color: inherit; padding: 4px 8px; }
+.pop .links { display: flex; gap: 10px; flex-wrap: wrap; }
+.pop .links a { text-decoration: none; font-weight: 500; font-size: 14px; padding: 9px 14px; display: inline-flex; gap: 6px; align-items: center; }
+.pop .body p { margin: 0 0 10px; max-width: 62ch; }
+.demo { padding: 18px; display: grid; gap: 12px; }
+.demo label { font-size: 13px; display: grid; gap: 6px; }
+.demo input[type=range] { width: 100%; }
+.demo .out { font-size: 28px; font-variant-numeric: tabular-nums; }
+.demo-cap { font-size: 12px; opacity: 0.7; }
+.habit { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; max-width: 320px; }
+.habit button { aspect-ratio: 1; border-radius: 4px; cursor: pointer; padding: 0; }
+
+dialog.pop.a { background: #f7f7f5; color: #151515; font-family: "Inter Tight", sans-serif; border-radius: 4px; }
+.pop.a .pop-head h3 { font-size: 28px; font-weight: 500; letter-spacing: -0.03em; }
+.pop.a .links a { border: 1px solid #151515; color: #151515; }
+.pop.a .links a.primary { background: #151515; color: #f7f7f5; }
+.pop.a .demo { background: #e9e9e5; }
+.pop.a .habit button { border: 0; background: #d5d5cf; } .pop.a .habit button.on { background: #1f3fd1; }
+
+dialog.pop.b { background: #fff6e0; color: #1d1a16; font-family: "Space Grotesk", sans-serif; border: 3px solid #1d1a16; border-radius: 22px; box-shadow: 8px 8px 0 #1d1a16; }
+.pop.b .pop-head h3 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 32px; }
+.pop.b .links a { border: 2px solid #1d1a16; color: #1d1a16; border-radius: 99px; background: #fff; }
+.pop.b .links a.primary { background: #ffd23f; }
+.pop.b .demo { background: #fff; border: 2px solid #1d1a16; border-radius: 14px; }
+.pop.b .habit button { border: 1.5px solid #1d1a16; background: #fff; } .pop.b .habit button.on { background: #ff5ca8; }
+
+dialog.pop.c { background: #0e1a2b; color: #d7e1ee; font-family: "Space Grotesk", sans-serif; border: 1px solid #27405f; border-radius: 8px; }
+.pop.c .pop-head h3 { font-size: 26px; font-weight: 500; }
+.pop.c .pop-head .prompt { font: 12px "JetBrains Mono", monospace; color: #ffb547; display: block; margin-bottom: 6px; }
+.pop.c .links a { font-family: "JetBrains Mono", monospace; font-size: 13px; border: 1px solid #27405f; color: #d7e1ee; border-radius: 4px; }
+.pop.c .links a.primary { border-color: #ffb547; color: #ffb547; }
+.pop.c .demo { background: #13233a; border: 1px solid #27405f; border-radius: 6px; }
+.pop.c .demo .out { font-family: "JetBrains Mono", monospace; color: #ffb547; }
+.pop.c .habit button { border: 1px solid #27405f; background: #0b1524; } .pop.c .habit button.on { background: #ffb547; border-color: #ffb547; }
+
+@media (max-width: 560px) {
+  dialog.pop { width: 100vw; max-width: 100vw; height: 100%; max-height: 100%; margin: 0; border-radius: 0; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="shell">
+  <header class="intro">
+    <h1>Three directions for your portfolio</h1>
+    <p>Each tab shows the same homepage and project popup in a different style. Click any project card to open its popup and try the interactive demo inside. The projects are placeholder examples.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Style direction">
+    <button class="tab" role="tab" id="tab-minimal" data-dir="minimal"><small>A</small> Minimal studio</button>
+    <button class="tab" role="tab" id="tab-bold" data-dir="bold"><small>B</small> Bold &amp; colourful</button>
+    <button class="tab" role="tab" id="tab-console" data-dir="console"><small>C</small> Dark blueprint</button>
+  </div>
+
+  <div class="notes" id="notes"></div>
+
+  <div class="frame">
+    <div class="frame-bar"><i></i><i></i><i></i><span>glentan.com</span></div>
+    <div class="mock" id="mock"></div>
+  </div>
+  <p class="example-tag">These are example projects. Your real projects replace them in the build.</p>
+</div>
+
+<dialog class="pop" id="pop" aria-labelledby="pop-title">
+  <div class="pop-inner" id="pop-inner"></div>
+</dialog>
+
+<script>
+const projects = [
+  { id: "split", title: "Bill Splitter", blurb: "Split a group dinner fairly, tip included.", tags: ["Claude app", "JS"], year: "2026", colour: "#ffd23f",
+    text: ["A small web app built with Claude that splits a restaurant bill between friends, including tip and uneven shares.", "Try the demo below: change the total and the number of people."],
+    demo: "split" },
+  { id: "habit", title: "Habit Grid", blurb: "A 4-week habit tracker you tap to fill in.", tags: ["HTML/CSS", "Design"], year: "2026", colour: "#7ee0c3",
+    text: ["A habit tracker that shows four weeks at a glance. Each square is one day, and a filled square means you did it.", "Tap squares in the demo to mark days done."],
+    demo: "habit" },
+  { id: "temp", title: "Weather Mood", blurb: "Turns today's temperature into a colour palette.", tags: ["Data viz", "Canvas"], year: "2025", colour: "#ff5ca8",
+    text: ["A visual experiment that maps temperature to colour, so a week of weather becomes a strip of swatches.", "Drag the slider to see how the colour changes from cold to hot."],
+    demo: "temp" }
+];
+
+const dirs = {
+  minimal: { cls: "a", notes: [["Feel", "Calm and precise. Lots of white space and fine rules, so the work does the talking."], ["Type", "Inter Tight with a monospace face for small details."], ["Good if", "You want a timeless, professional look that suits any kind of project."]] },
+  bold: { cls: "b", notes: [["Feel", "Playful and confident. Chunky outlines, hard shadows and a colour for each project."], ["Type", "Bricolage Grotesque headlines with Space Grotesk body text."], ["Good if", "You want visitors to remember your personality as much as your work."]] },
+  console: { cls: "c", notes: [["Feel", "Technical and focused. A dark blueprint grid with amber highlights, like a developer's workspace."], ["Type", "Space Grotesk with JetBrains Mono for labels and commands."], ["Good if", "Your projects are mostly code, tools and Claude-built apps."]] }
+};
+
+const mock = document.getElementById("mock");
+const notes = document.getElementById("notes");
+const pop = document.getElementById("pop");
+const popInner = document.getElementById("pop-inner");
+let current = "minimal";
+
+function thumb(p, d) {
+  if (d === "a") return `<div class="thumb"><svg width="60" height="60" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="22" fill="none" stroke="#151515" stroke-width="1.5"/><line x1="8" y1="30" x2="52" y2="30" stroke="#151515" stroke-width="1.5"/></svg></div>`;
+  if (d === "b") return `<div class="thumb" style="background:${p.colour}"><span style="font:800 40px 'Bricolage Grotesque',sans-serif">${p.title[0]}</span></div>`;
+  return `<div class="thumb"><span style="font:12px 'JetBrains Mono',monospace;color:#6f86a3">./${p.id}/preview</span></div>`;
+}
+
+function renderMock() {
+  const d = dirs[current].cls;
+  mock.className = "mock " + d;
+  const heroA = `<div class="hero"><h2>Glen Tan builds small, useful things for the web.</h2><p>Selected projects, experiments and apps. Open any project to try a live preview.</p></div>`;
+  const heroB = `<div class="hero"><h2>Hi, I'm Glen. I make <em>fun</em> little web things.</h2><p>Here's what I've been building lately. Click a card to play with it.</p></div>`;
+  const heroC = `<div class="hero"><div class="prompt">~/glen $ ls projects/</div><h2>Tools, experiments and apps built with code and Claude.</h2><p>Every project opens with a working preview, plus links to its source and the live app.</p></div>`;
+  const cards = projects.map(p => {
+    if (d === "a") return `<button class="card" data-id="${p.id}"><div class="meta"><span>${p.tags.join(" · ")}</span><span>${p.year}</span></div>${thumb(p, d)}<h3>${p.title}</h3><p>${p.blurb}</p></button>`;
+    if (d === "b") return `<button class="card" data-id="${p.id}">${thumb(p, d)}<h3>${p.title}</h3><p>${p.blurb}</p><div class="chips">${p.tags.map(t => `<span class="chip">${t}</span>`).join("")}</div></button>`;
+    return `<button class="card" data-id="${p.id}">${thumb(p, d)}<div class="meta">${p.year} — ${p.tags.join(", ")}</div><h3>${p.title}</h3><p>${p.blurb}</p></button>`;
+  }).join("");
+  mock.innerHTML = `<nav><strong>${d === "c" ? "glen@portfolio" : "Glen Tan"}</strong><ul><li>Work</li><li>About</li><li>Contact</li></ul></nav>${d === "a" ? heroA : d === "b" ? heroB : heroC}<div class="grid">${cards}</div>`;
+  notes.innerHTML = dirs[current].notes.map(([k, v]) => `<div class="note"><b>${k}</b>${v}</div>`).join("");
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.dir === current ? "true" : "false"));
+}
+
+function demoHTML(p) {
+  if (p.demo === "split") return `<label for="d-total">Bill total: <span id="d-total-v">$120</span><input id="d-total" type="range" min="20" max="400" value="120"></label><label for="d-ppl">People: <span id="d-ppl-v">4</span><input id="d-ppl" type="range" min="2" max="12" value="4"></label><div><div class="out" id="d-out"></div><div class="demo-cap">each, with a 15% tip</div></div>`;
+  if (p.demo === "habit") return `<div class="habit">${Array.from({ length: 28 }, (_, i) => `<button aria-label="Day ${i + 1}" class="${[0,1,3,4,7,8,9,12,15,16].includes(i) ? "on" : ""}"></button>`).join("")}</div><div class="demo-cap" id="d-habit">10 of 28 days</div>`;
+  return `<label for="d-temp">Temperature: <span id="d-temp-v">18°C</span><input id="d-temp" type="range" min="-10" max="40" value="18"></label><div id="d-sw" style="height:70px;border-radius:6px"></div><div class="demo-cap" id="d-temp-cap"></div>`;
+}
+
+function wireDemo(p) {
+  if (p.demo === "split") {
+    const t = popInner.querySelector("#d-total"), n = popInner.querySelector("#d-ppl");
+    const upd = () => {
+      popInner.querySelector("#d-total-v").textContent = "$" + t.value;
+      popInner.querySelector("#d-ppl-v").textContent = n.value;
+      popInner.querySelector("#d-out").textContent = "$" + (t.value * 1.15 / n.value).toFixed(2);
+    };
+    t.oninput = n.oninput = upd; upd();
+  } else if (p.demo === "habit") {
+    const cap = popInner.querySelector("#d-habit");
+    popInner.querySelectorAll(".habit button").forEach(b => b.onclick = () => {
+      b.classList.toggle("on");
+      cap.textContent = popInner.querySelectorAll(".habit .on").length + " of 28 days";
+    });
+  } else {
+    const s = popInner.querySelector("#d-temp");
+    const upd = () => {
+      const v = +s.value, hue = 220 - ((v + 10) / 50) * 220;
+      popInner.querySelector("#d-temp-v").textContent = v + "°C";
+      popInner.querySelector("#d-sw").style.background = `linear-gradient(90deg, hsl(${hue} 80% 55%), hsl(${hue - 20} 85% 62%))`;
+      popInner.querySelector("#d-temp-cap").textContent = v < 5 ? "Cold: deep blues" : v < 22 ? "Mild: greens and teals" : "Hot: oranges and reds";
+    };
+    s.oninput = upd; upd();
+  }
+}
+
+function openProject(id) {
+  const p = projects.find(x => x.id === id); if (!p) return;
+  const d = dirs[current].cls;
+  pop.className = "pop " + d;
+  popInner.innerHTML = `
+    <div class="pop-head"><div>${d === "c" ? `<span class="prompt">$ open ${p.id}</span>` : ""}<h3 id="pop-title">${p.title}</h3></div><button class="close" aria-label="Close popup">×</button></div>
+    <div class="body">${p.text.map(t => `<p>${t}</p>`).join("")}</div>
+    <div class="demo">${demoHTML(p)}</div>
+    <div class="links"><a class="primary" href="https://claude.ai" target="_blank" rel="noopener">Open live app ↗</a><a href="https://github.com" target="_blank" rel="noopener">View on GitHub ↗</a></div>`;
+  wireDemo(p);
+  popInner.querySelector(".close").onclick = () => pop.close();
+  pop.showModal();
+}
+
+pop.addEventListener("click", e => { if (e.target === pop) pop.close(); });
+mock.addEventListener("click", e => { const c = e.target.closest(".card"); if (c) openProject(c.dataset.id); });
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => { location.hash = t.dataset.dir; }));
+
+function route() { const h = location.hash.slice(1); current = dirs[h] ? h : "minimal"; if (pop.open) pop.close(); renderMock(); }
+window.addEventListener("hashchange", route);
+route();
+</script>

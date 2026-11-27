@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bill Splitter preview</title>
+<style>
+:root{--bg:#ecece8;--fg:#151515;--muted:#66665f;--soft:#d6d6cf;--accent:#1f3fd1;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1c1d1a;--fg:#ededea;--muted:#a3a39b;--soft:#34352f;--accent:#8ea0ff;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#1c1d1a;--fg:#ededea;--muted:#a3a39b;--soft:#34352f;--accent:#8ea0ff;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;padding:24px;background:var(--bg);color:var(--fg);font:15px/1.5 "Inter Tight",system-ui,sans-serif;display:grid;gap:16px;align-content:start}
+label{display:grid;gap:6px;font-size:14px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.cap{font:12px "IBM Plex Mono",ui-monospace,monospace;color:var(--muted)}
+</style>
+<style>.out{font-size:44px;font-weight:500;letter-spacing:-.03em;font-variant-numeric:tabular-nums}</style></head>
+<body>
+<label for="total">Bill total: <b id="total-v"></b><input id="total" type="range" min="20" max="400" value="120"></label>
+<label for="people">People: <b id="people-v"></b><input id="people" type="range" min="2" max="12" value="4"></label>
+<div><div class="out" id="out"></div><div class="cap">each, including a 15% tip</div></div>
+<script>
+const t=document.getElementById("total"),p=document.getElementById("people");
+function update(){
+  const cents=Math.round(t.value*100*1.15), each=Math.ceil(cents/p.value);
+  document.getElementById("total-v").textContent="$"+t.value;
+  document.getElementById("people-v").textContent=p.value;
+  document.getElementById("out").textContent="$"+(each/100).toFixed(2);
+}
+t.oninput=p.oninput=update;update();
+</script></body></html>

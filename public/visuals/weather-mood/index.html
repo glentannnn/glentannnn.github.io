@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Weather Mood preview</title>
+<style>
+:root{--bg:#ecece8;--fg:#151515;--muted:#66665f;--soft:#d6d6cf;--accent:#1f3fd1;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1c1d1a;--fg:#ededea;--muted:#a3a39b;--soft:#34352f;--accent:#8ea0ff;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#1c1d1a;--fg:#ededea;--muted:#a3a39b;--soft:#34352f;--accent:#8ea0ff;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;padding:24px;background:var(--bg);color:var(--fg);font:15px/1.5 "Inter Tight",system-ui,sans-serif;display:grid;gap:16px;align-content:start}
+label{display:grid;gap:6px;font-size:14px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.cap{font:12px "IBM Plex Mono",ui-monospace,monospace;color:var(--muted)}
+</style>
+<style>#swatch{height:90px;transition:background .2s}</style></head>
+<body>
+<label for="temp">Temperature: <b id="temp-v"></b><input id="temp" type="range" min="-10" max="40" value="18"></label>
+<div id="swatch"></div>
+<div class="cap" id="cap"></div>
+<script>
+const s=document.getElementById("temp");
+function update(){
+  const v=+s.value,hue=220-((v+10)/50)*220;
+  document.getElementById("temp-v").textContent=v+"°C";
+  document.getElementById("swatch").style.background="linear-gradient(90deg,hsl("+hue+" 75% 55%),hsl("+(hue-25)+" 80% 62%))";
+  document.getElementById("cap").textContent=v<5?"Cold: deep blues":v<22?"Mild: greens and teals":"Hot: oranges and reds";
+}
+s.oninput=update;update();
+</script></body></html>

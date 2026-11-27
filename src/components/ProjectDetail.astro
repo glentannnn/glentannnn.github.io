@@ -1,0 +1,55 @@
+---
+// The inside of a project: title, links, interactive preview and write-up.
+// Used by both the homepage popup and the standalone /projects/<slug> page.
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  headingId?: string;
+  lazyVisual?: boolean; // in the popup the iframe loads only when it opens
+}
+
+const { project, headingId, lazyVisual = false } = Astro.props;
+const { title, year, tags, visual, visualHeight, github, demo } = project.data;
+const { Content } = await render(project);
+---
+
+<article class="detail">
+  <header class="head">
+    <p class="mono">{year} · {tags.join(" · ")}</p>
+    <h2 id={headingId}>{title}</h2>
+    {(demo || github) && (
+      <div class="links">
+        {demo && <a class="btn primary" href={demo} target="_blank" rel="noopener">Open live app ↗</a>}
+        {github && <a class="btn" href={github} target="_blank" rel="noopener">View on GitHub ↗</a>}
+      </div>
+    )}
+  </header>
+
+  {visual && (
+    <figure class="visual">
+      <iframe
+        title={`${title}: interactive preview`}
+        src={lazyVisual ? undefined : visual}
+        data-src={visual}
+        loading="lazy"
+        style={`height: ${visualHeight}px`}
+      ></iframe>
+      <figcaption class="label">Interactive preview</figcaption>
+    </figure>
+  )}
+
+  <div class="prose">
+    <Content />
+  </div>
+</article>
+
+<style>
+  .detail { display: grid; gap: 28px; }
+  .head { display: grid; gap: 10px; padding-right: 48px; }
+  .head h2 { font-size: var(--step-2); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; }
+  .links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+  .visual { margin: 0; display: grid; gap: 8px; }
+  iframe { width: 100%; max-width: 100%; border: 0; background: var(--surface); display: block; }
+</style>

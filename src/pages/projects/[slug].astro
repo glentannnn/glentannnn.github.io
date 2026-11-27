@@ -1,0 +1,25 @@
+---
+// A standalone page per project: for sharing, search engines and visitors without JavaScript.
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import ProjectDetail from "../../components/ProjectDetail.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects", ({ data }) => !data.draft);
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+---
+
+<Base title={project.data.title} description={project.data.summary}>
+  <div class="page wrap">
+    <a class="back mono" href="/#work">← All projects</a>
+    <ProjectDetail project={project} />
+  </div>
+</Base>
+
+<style>
+  .page { max-width: 860px; display: grid; gap: 32px; padding-top: 32px; }
+  .back { text-decoration: none; }
+</style>

@@ -1,0 +1,75 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ProjectDetail from "./ProjectDetail.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const headingId = `dlg-title-${project.id}`;
+---
+
+<dialog class="project-modal" id={`dlg-${project.id}`} data-project={project.id} aria-labelledby={headingId}>
+  <div class="inner">
+    <button class="close" type="button" aria-label="Close" data-close>×</button>
+    <ProjectDetail project={project} headingId={headingId} lazyVisual />
+  </div>
+</dialog>
+
+<style>
+  .project-modal {
+    width: min(820px, calc(100vw - 32px));
+    max-height: calc(100dvh - 48px);
+    padding: 0;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--fg);
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  .project-modal::backdrop { background: var(--backdrop); }
+  .project-modal[open] { animation: rise 0.22s ease-out; }
+  .inner { position: relative; padding: clamp(24px, 4vw, 44px); }
+  .close {
+    /* Sticky so it stays reachable while scrolling; the negative bottom margin lets the header slide up beside it. */
+    position: sticky;
+    top: 0;
+    display: block;
+    margin: -12px -12px -28px auto;
+    width: 40px;
+    height: 40px;
+    font-size: 26px;
+    line-height: 1;
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--line-soft);
+    cursor: pointer;
+    z-index: 1;
+  }
+  .close:hover { border-color: var(--line); }
+
+  /* Phones: the popup fills the screen. */
+  @media (max-width: 600px) {
+    .project-modal {
+      width: 100vw;
+      max-width: 100vw;
+      height: 100dvh;
+      max-height: 100dvh;
+      margin: 0;
+      border: 0;
+    }
+    .inner {
+      padding-top: calc(env(safe-area-inset-top, 0px) + 24px);
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+    }
+    .close { margin: -8px 0 -32px auto; }
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+</style>
